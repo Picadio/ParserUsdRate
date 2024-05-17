@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "dev" ]
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: dev
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+  parser:
+    depends_on:
+      - postgres
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      NODEMAILER_EMAIL: "youremail@gmail.com"
+      NODEMAILER_PASSWORD: "your app password"
+      NODEMAILER_HOST: "smtp.google.com"
+      NODEMAILER_PORT: "465"
+      RATE_API: "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
+      CONNECTION_STRING: "postgresql://dev:dev@postgres:5432/dev?connect_timeout=5"
+    networks:
+      - default

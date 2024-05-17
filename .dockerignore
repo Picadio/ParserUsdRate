@@ -1,0 +1,12 @@
+Dockerfile
+docker-compose*.yml
+venv
+node_modules
+dist
+e2e
+*.env*
+*.spec*
+*.e2e*
+migration
+docker-compose.yml
+*Dockerfile
