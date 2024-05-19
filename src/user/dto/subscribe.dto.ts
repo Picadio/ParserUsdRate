@@ -5,4 +5,4 @@ export class SubscribeDto{
 
 export const SubscribeDtoSchema = z.object({
   email: z.string().email()
-}).required();
+}).required().strict();

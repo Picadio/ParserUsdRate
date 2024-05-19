@@ -6,11 +6,13 @@ import { SubscribeDto, SubscribeDtoSchema } from "./user/dto/subscribe.dto";
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
+  // api/rate
   @Get("rate")
   getRate(){
     return this.appService.getRate();
   }
+
+  // api/subscribe
   @Post("subscribe")
   subscribe(@Body(new ZodValidationPipe(SubscribeDtoSchema)) subscribeDto: SubscribeDto){
     return this.appService.subscribe(subscribeDto);
